@@ -36,20 +36,17 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: "css-loader",
-                        options: {
-                            importLoaders: 1,
-                        }
-                    }
+                    MiniCssExtractPlugin.loader, "css-loader"
                 ]
             },
             {
                 test: /\.(jpg|jpeg|png|gif)/,
                 use: {
                     loader: "file-loader",
-
+                    options: {
+                        filename: "[name].[ext]",
+                        outputPath: "styles/images",
+                    }
                 }
             }
         ]
