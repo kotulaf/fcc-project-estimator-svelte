@@ -18,8 +18,23 @@ const add = (name, price) => {
     })
 }
 
+const edit = (id, name, price) => {
+    materialStore.update(items => {
+        const index = items.findIndex(i => i.id === id)
+        items[index].name = name;
+        items[index].price = price;
+
+        return items;
+    });
+}
+
+const deleteMaterial = (id) => {
+    materialStore.update(items => {
+        return items.filter(material => material.id !== id);
+    });
+}
+
 materialStore.subscribe((items) => {
-    console.log(items, "materials");
     const jsonString = JSON.stringify(items);
     localStorage.setItem(key, jsonString);
 })
@@ -27,4 +42,6 @@ materialStore.subscribe((items) => {
 export default {
     subscribe: materialStore.subscribe,
     add,
+    edit,
+    deleteMaterial,
 }
